@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal Power BI Responsivo</title>
+  <style>
+    /* Reset e base */
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #f5f5f5;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Contêiner principal */
+    .report-container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      border: none;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Ajustes visuais para mobile */
+    @media (max-width: 768px) {
+      body {
+        background: #fff;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="report-container" id="reportContainer"></div>
+
+  <script>
+    // Detecta se é acesso por celular/tablet
+    const isMobile = /iPhone|iPad|Android|Mobile/i.test(navigator.userAgent);
+
+    // URLs do Power BI (desktop e mobile)
+    const urlDesktop = "https://app.powerbi.com/reportEmbed?reportId=51bd215f-5a4c-426e-946f-1aeab3d66d29&autoAuth=true&ctid=b8c25932-5e76-4b2b-9c53-d41745e9c92d";
+    const urlMobile  = "https://app.powerbi.com/view?r=eyJrIjoiMzNlNDkyZDctOGYyZi00MGFlLThlOTItMzdkNTlkOWRhNDRmIiwidCI6ImI4YzI1OTMyLTVlNzYtNGIyYi05YzUzLWQ0MTc0NWU5YzkyZCJ9";
+
+    // Escolhe automaticamente a versão
+    const embedUrl = isMobile ? urlMobile : urlDesktop;
+
+    // Insere o iframe dinamicamente
+    document.getElementById("reportContainer").innerHTML = `
+      <iframe 
+        title="Portal Power BI Responsivo"
+        src="${embedUrl}"
+        allowfullscreen="true">
+      </iframe>`;
+  </script>
+</body>
+</html>
